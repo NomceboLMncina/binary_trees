@@ -1,12 +1,11 @@
 #include "binary_trees.h"
 
 /**
- * bst_insert - Inserts a value in a Binary Search Tree (BST).
- * @tree: A double pointer to the root node of the BST.
- * @value: The value to store in the node to be inserted.
- *
- * Return: A pointer to the created node.
- *         NULL on failure or if the value already exists in the tree.
+ * bst_insert - inserts a value in a Binary Search Tree
+ * @tree: a double pointer to the root node of the BST to insert the value
+ * @value: the value to store in the node to be inserted
+ * Return: A pointer to the created node
+ *         NULL on failure
  */
 bst_t *bst_insert(bst_t **tree, int value)
 {
@@ -15,7 +14,7 @@ bst_t *bst_insert(bst_t **tree, int value)
 	bst_t *new = binary_tree_node(NULL, value);
 
 	if (*tree == NULL)
-		return (*tree = new);
+		*tree = new;
 
 	while (tmp)
 	{
@@ -24,11 +23,13 @@ bst_t *bst_insert(bst_t **tree, int value)
 			tmp = tmp->left;
 		else if (value > tmp->n)
 			tmp = tmp->right;
-		else
+		else if (value == tmp->n)
 			return (NULL);
 	}
 
-	if (value < second->n)
+	if (second == NULL)
+		second = new;
+	else if (value < second->n)
 	{
 		second->left = new;
 		new->parent = second;
@@ -43,20 +44,17 @@ bst_t *bst_insert(bst_t **tree, int value)
 }
 
 /**
- * avl_insert - Inserts a value in an AVL Tree.
- * @tree: A double pointer to the root node of the AVL tree.
- * @value: The value to insert in the AVL tree.
+ * avl_insert - inserts a value in an AVL Tree
+ * @tree: a double pointer to the root node of the AVL tree
+ * @value: value to insert
  *
- * Return: A pointer to the created node.
- *         NULL on failure.
+ * Return: a pointer to the created node
+ *         NULL on failure
  */
 avl_t *avl_insert(avl_t **tree, int value)
 {
 	int balance = 0;
 	avl_t *node = bst_insert(tree, value);
-
-	if (!node)
-		return (NULL);
 
 	balance = binary_tree_balance(*tree);
 
