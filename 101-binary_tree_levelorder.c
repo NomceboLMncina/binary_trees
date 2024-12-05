@@ -51,7 +51,7 @@ void btlo_helper(const binary_tree_t *tree, void (*func)(int), size_t level)
  * @tree: A pointer to the root node of the tree.
  *
  * Return: The height of the tree. Returns 0 if the tree is NULL.
- *         The height is the length of the longest path from the root to a leaf.
+ *         The height is the lengt of the longest path from the root to a leaf.
  */
 size_t binary_tree_height(const binary_tree_t *tree)
 {
